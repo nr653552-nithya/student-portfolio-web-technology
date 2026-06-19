@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nithya Portfolio | Student Portfolio with Dark Mode</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <body>
+<center>
+<nav>
+<a href="login.html">LOGIN</a>
+<a href="home.html">HOME</a>
+<a href="about.html">ABOUT</a>
+<a href="skills.html">SKILLS</a>
+<a href="project.html">PROJECTS</a>
+<a href="contact.html">CONTACT</a>
+
+</nav>
+</center>
+</body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dark Mode Variables */
+        body.dark-mode {
+            background: linear-gradient(135deg, #8e8ee3 0%, #16213e 100%);
+        }
+
+        body.dark-mode .glass-card,
+        body.dark-mode .login-card,
+        body.dark-mode .nav-bar,
+        body.dark-mode .page-card {
+            background: rgba(20, 20, 40, 0.95);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        body.dark-mode .input-field {
+            background: rgba(30, 30, 50, 0.9);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        body.dark-mode .skill-tag,
+        body.dark-mode .project-card {
+            background: rgba(50, 50, 70, 0.8);
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo h2 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #e2e8f0;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #667eea;
+        }
+
+        .dark-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .logout-nav-btn {
+            background: linear-gradient(135deg, #ff6f61, #ff3b2e);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Login Card */
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-card h2 {
+            font-size: 1.2rem;
+            color: #718096;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.3rem;
+        }
+
+        body.dark-mode .input-group label {
+            color: #cbd5e0;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .input-field:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .password-req {
+            background: #f7fafc;
+            padding: 0.8rem;
+            border-radius: 0.8rem;
+            margin: 0.8rem 0;
+            font-size: 0.7rem;
+        }
+
+        body.dark-mode .password-req {
+            background: rgba(30, 30, 50, 0.8);
+        }
+
+        .password-req p {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .req-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .req-list li {
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .req-list li.valid {
+            color: #38a169;
+        }
+
+        .req-list li.invalid {
+            color: #e53e3e;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            padding: 0.9rem;
+            border-radius: 1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Dashboard Pages */
+        .dashboard-section {
+            display: none;
+        }
+
+        .dashboard-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .skills-grid, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card, .project-card {
+            background: #f8fafc;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        body.dark-mode .skill-card, body.dark-mode .project-card {
+            background: rgba(50, 50, 70, 0.8);
+        }
+
+        .skill-card:hover, .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-card i, .project-card i {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 1rem;
+            border: 2px solid #e2e8f0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3748;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 3rem;
+            z-index: 2000;
+            transition: 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        nav{
+    margin-bottom:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#ffd700;
+}
+
+
+        @media (max-width: 768px) {
+            .nav-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar (Hidden initially) -->
+<nav class="nav-bar" id="mainNav" style="display: none;">
+    <div class="logo">
+        <h2><i class="fas fa-graduation-cap"></i> Nithya Portfolio</h2>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#" data-page="home" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" data-page="skills" class="nav-link"><i class="fas fa-code"></i> Skills</a></li>
+        <li><a href="#" data-page="projects" class="nav-link"><i class="fas fa-folder-open"></i> Projects</a></li>
+        <li><a href="#" data-page="contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+        <button id="darkModeToggle" class="dark-toggle"><i class="fas fa-moon"></i></button>
+        <button id="logoutNavBtn" class="logout-nav-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- Login Section -->
+    <div id="loginSection" class="login-wrapper">
+        <div class="login-card">
+            <h1><i class="fas fa-user-circle"></i> Nithya Portfolio</h1>
+            <h2>Student Login · Continue to Portfolio</h2>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <label><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="username" class="input-field" placeholder="Enter your username" required>
+                </div>
+                
+                <div class="input-group">
+                    <label><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" class="input-field" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="input-group">
+                    <label><i class="fas fa-phone"></i> Phone Number</label>
+                    <input type="tel" id="phone" class="input-field" placeholder="10-digit mobile number" maxlength="10" required>
+                </div>
+                
+                <div class="input-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" class="input-field" placeholder="Enter strong password" required>
+                </div>
+                
+                <div class="password-req">
+                    <p>⚠️ Password must contain:</p>
+                    <ul class="req-list" id="passwordReqs">
+                        <li id="reqUpper"><i class="far fa-circle"></i> 1 uppercase (A-Z)</li>
+                        <li id="reqLower"><i class="far fa-circle"></i> 1 lowercase (a-z)</li>
+                        <li id="reqNumber"><i class="far fa-circle"></i> 1 number (0-9)</li>
+                        <li id="reqSymbol"><i class="far fa-circle"></i> 1 symbol (@$!%^*?&)</li>
+                        <li id="reqLength"><i class="far fa-circle"></i> minimum 10 characters</li>
+                    </ul>
+                </div>
+                
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember Me</label>
+                </div>
+                
+                <button type="submit" class="login-btn"><i class="fas fa-arrow-right-to-bracket"></i> Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Pages -->
+    <div id="dashboardContainer" class="dashboard-section">
+        <!-- Home Page -->
+        <div id="homePage" class="dashboard-page">
+            <div class="page-card hero">
+                <h1><i class="fas fa-smile-wink"></i> Welcome to Nithya's Portfolio!</h1>
+                <p style="margin-top: 1rem;">Creative Developer | Problem Solver | Passionate Learner</p>
+                <p style="margin-top: 0.5rem;">Showcasing my journey, skills, and creative projects.</p>
+            </div>
+            <div class="page-card">
+                <h2><i class="fas fa-star"></i> About Me</h2>
+                <p>I'm Nithya, a dedicated student developer with a love for building innovative web applications. I specialize in full-stack development and modern UI/UX design. This portfolio reflects my passion for coding and continuous learning.</p>
+            </div>
+        </div>
+
+        <!-- Skills Page -->
+        <div id="skillsPage" class="dashboard-page">
+            <div class="page-card">
+                <h2><i class="fas fa-code"></i> My Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-card"><i class="fab fa-html5"></i><h3>HTML5</h3><p>Semantic, SEO friendly</p></div>
+                    <div class="skill-card"><i class="fab fa-css3-alt"></i><h3>CSS3</h3><p>Flexbox, Grid, Animations</p></div>
+                    <div class="skill-card"><i class="fab fa-js"></i><h3>JavaScript</h3><p>ES6+, DOM, APIs</p></div>
+                    <div class="skill-card"><i class="fab fa-react"></i><h3>React.js</h3><p>Hooks, Components</p></div>
+                    <div class="skill-card"><i class="fab fa-python"></i><h3>Python</h3><p>Data Structures, Flask</p></div>
+                    <div class="skill-card"><i class="fas fa-database"></i><h3>MongoDB</h3><p>NoSQL, Mongoose</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Page -->
+        <div id="projectsPage" class="dashboard-page">
+            <div class="page-card">
+                <h2><i class="fas fa-folder-open"></i> Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card"><i class="fas fa-cloud-sun"></i><h3>Weather App</h3><p>Real-time weather using API</p></div>
+                    <div class="project-card"><i class="fas fa-shopping-cart"></i><h3>E-Commerce UI</h3><p>Modern product showcase</p></div>
+                    <div class="project-card"><i class="fas fa-tasks"></i><h3>Task Manager</h3><p>Productivity tool with localStorage</p></div>
+                    <div class="project-card"><i class="fas fa-chart-line"></i><h3>Portfolio Dashboard</h3><p>Interactive student portfolio</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contactPage" class="dashboard-page">
+            <div class="page-card">
+                <h2><i class="fas fa-envelope"></i> Contact Me</h2>
+                <div class="contact-form">
+                    <div class="input-group">
+                        <label>Name</label>
+                        <input type="text" id="contactName" class="input-field" placeholder="Your Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" id="contactEmail" class="input-field" placeholder="Your Email">
+                    </div>
+                    <div class="input-group">
+                        <label>Message</label>
+                        <textarea rows="4" id="contactMsg" class="input-field" placeholder="Your Message"></textarea>
+                    </div>
+                    <button class="login-btn" id="sendMsgBtn" style="margin-top: 1rem;"><i class="fas fa-paper-plane"></i> Send Message</button>
+                </div>
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p><i class="fas fa-map-marker-alt"></i> Chennai, India</p>
+                    <p><i class="fas fa-envelope"></i> nithya.portfolio@example.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+    // DOM Elements
+    const loginSection = document.getElementById('loginSection');
+    const dashboardContainer = document.getElementById('dashboardContainer');
+    const mainNav = document.getElementById('mainNav');
+    const loginForm = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('username');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const passwordInput = document.getElementById('password');
+    const rememberCheck = document.getElementById('rememberMe');
+    const toast = document.getElementById('toast');
+    
+    // Password requirement elements
+    const reqUpper = document.getElementById('reqUpper');
+    const reqLower = document.getElementById('reqLower');
+    const reqNumber = document.getElementById('reqNumber');
+    const reqSymbol = document.getElementById('reqSymbol');
+    const reqLength = document.getElementById('reqLength');
+    
+    // Show toast
+    function showToast(message, isError = true) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        toast.style.background = isError ? '#e53e3e' : '#38a169';
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+    
+    // Validate Password (uppercase, lowercase, number, symbol, min 10)
+    function validatePassword(password) {
+        const hasUpper = /[A-Z]/.test(password);
+        const hasLower = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSymbol = /[@$!%^*?&]/.test(password);
+        const hasMinLength = password.length >= 10;
+        
+        updateReqIcon(reqUpper, hasUpper);
+        updateReqIcon(reqLower, hasLower);
+        updateReqIcon(reqNumber, hasNumber);
+        updateReqIcon(reqSymbol, hasSymbol);
+        updateReqIcon(reqLength, hasMinLength);
+        
+        return hasUpper && hasLower && hasNumber && hasSymbol && hasMinLength;
+    }
+    
+    function updateReqIcon(element, isValid) {
+        if (isValid) {
+            element.innerHTML = '<i class="fas fa-check-circle"></i> ' + element.innerText.substring(1);
+            element.classList.add('valid');
+            element.classList.remove('invalid');
+        } else {
+            element.innerHTML = '<i class="far fa-circle"></i> ' + element.innerText.substring(1);
+            element.classList.add('invalid');
+            element.classList.remove('valid');
+        }
+    }
+    
+    // Real-time password validation
+    passwordInput.addEventListener('input', function() {
+        validatePassword(passwordInput.value);
+    });
+    
+    // Phone number validation (10 digits)
+    function validatePhone(phone) {
+        return /^\d{10}$/.test(phone);
+    }
+    
+    // Email validation
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    
+    // Username validation
+    function validateUsername(username) {
+        return username.trim().length >= 3;
+    }
+    
+    // Handle Login
+    function handleLogin(e) {
+        e.preventDefault();
+        
+        const username = usernameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const password = passwordInput.value;
+        const remember = rememberCheck.checked;
+        
+        if (!validateUsername(username)) {
+            showToast("Username must be at least 3 characters", true);
+            return;
+        }
+        if (!validateEmail(email)) {
+            showToast("Please enter a valid email address", true);
+            return;
+        }
+        if (!validatePhone(phone)) {
+            showToast("Phone number must be exactly 10 digits", true);
+            return;
+        }
+        if (!validatePassword(password)) {
+            showToast("Password does not meet all requirements! Check the list.", true);
+            return;
+        }
+        
+        // Store user data
+        const userData = { username, email, phone, loggedIn: true };
+        if (remember) {
+            localStorage.setItem('portfolioUserData', JSON.stringify(userData));
+        } else {
+            sessionStorage.setItem('portfolioUserData', JSON.stringify(userData));
+        }
+        
+        showToast("Login Successful! Welcome " + username, false);
+        
+        setTimeout(() => {
+            showDashboard();
+        }, 1000);
+    }
+    
+    function showDashboard() {
+        loginSection.style.display = 'none';
+        dashboardContainer.classList.add('active');
+        mainNav.style.display = 'flex';
+        
+        // Display username in hero
+        let userData = null;
+        const stored = localStorage.getItem('portfolioUserData') || sessionStorage.getItem('portfolioUserData');
+        if (stored) {
+            userData = JSON.parse(stored);
+            const heroTitle = document.querySelector('#homePage .hero h1');
+            if (heroTitle) heroTitle.innerHTML = `<i class="fas fa-smile-wink"></i> Welcome, ${userData.username}!`;
+        }
+        showPage('home');
+    }
+    
+    // Page switching
+    function showPage(pageName) {
+        const pages = ['homePage', 'skillsPage', 'projectsPage', 'contactPage'];
+        pages.forEach(page => {
+            const el = document.getElementById(page);
+            if (el) el.style.display = 'none';
+        });
+        const activePage = document.getElementById(pageName + 'Page');
+        if (activePage) activePage.style.display = 'block';
+        
+        // Update nav active class
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const linkPage = link.getAttribute('data-page');
+            if (linkPage === pageName) link.classList.add('active');
+            else link.classList.remove('active');
+        });
+    }
+    
+    // Logout
+    function logout() {
+        localStorage.removeItem('portfolioUserData');
+        sessionStorage.removeItem('portfolioUserData');
+        showToast("Logged out successfully", false);
+        setTimeout(() => {
+            location.reload();
+        }, 800);
+    }
+    
+    // Dark Mode Toggle
+    function initDarkMode() {
+        const darkBtn = document.getElementById('darkModeToggle');
+        const isDark = localStorage.getItem('darkMode') === 'enabled';
+        if (isDark) {
+            document.body.classList.add('dark-mode');
+            darkBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            document.body.classList.remove('dark-mode');
+            darkBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+        
+        darkBtn.addEventListener('click', () => {
+            if (document.body.classList.contains('dark-mode')) {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
+                darkBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
+                darkBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+    }
+    
+    // Check existing login
+    function checkExistingLogin() {
+        const storedUser = localStorage.getItem('portfolioUserData') || sessionStorage.getItem('portfolioUserData');
+        if (storedUser) {
+            showDashboard();
+        } else {
+            loginSection.style.display = 'flex';
+            dashboardContainer.classList.remove('active');
+            mainNav.style.display = 'none';
+        }
+    }
+    
+    // Phone input restrict to digits
+    phoneInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+    });
+    
+    // Send message contact
+    document.getElementById('sendMsgBtn')?.addEventListener('click', () => {
+        const name = document.getElementById('contactName')?.value;
+        const email = document.getElementById('contactEmail')?.value;
+        const msg = document.getElementById('contactMsg')?.value;
+        if (!name || !email || !msg) {
+            showToast("Please fill all contact fields", true);
+        } else {
+            showToast("Message sent! I'll get back soon.", false);
+            document.getElementById('contactName').value = '';
+            document.getElementById('contactEmail').value = '';
+            document.getElementById('contactMsg').value = '';
+        }
+    });
+    
+    // Event Listeners
+    loginForm.addEventListener('submit', handleLogin);
+    document.getElementById('logoutNavBtn')?.addEventListener('click', logout);
+    
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = link.getAttribute('data-page');
+            showPage(page);
+        });
+    });
+    
+    // Initialize
+    initDarkMode();
+    checkExistingLogin();
+    
+    // Set default password requirement icons
+    function initReqs() {
+        updateReqIcon(reqUpper, false);
+        updateReqIcon(reqLower, false);
+        updateReqIcon(reqNumber, false);
+        updateReqIcon(reqSymbol, false);
+        updateReqIcon(reqLength, false);
+    }
+    initReqs();
+</script>
+</body>
+</html>
+```
