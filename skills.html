@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Skills | Nithya Portfolio</title>
+
+  <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#f4f7fb;
+  color:#111;
+  transition:0.4s;
+  overflow-x:hidden;
+}
+
+/* SCROLL PROGRESS BAR */
+
+.scroll-progress{
+  position:fixed;
+  top:0;
+  left:0;
+  width:0%;
+  height:4px;
+  background:linear-gradient(90deg,#2563eb,#7c3aed);
+  z-index:10000;
+  transition:width 0.1s;
+}
+
+/* LOADER */
+
+#loader{
+  position:fixed;
+  width:100%;
+  height:100vh;
+  background:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  transition:0.5s;
+}
+
+.spinner{
+  width:60px;
+  height:60px;
+  border:6px solid #ddd;
+  border-top:6px solid #2563eb;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  100%{transform:rotate(360deg);}
+}
+
+/* NAVBAR */
+
+nav{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 8%;
+  background:white;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  position:fixed;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+  color:#2563eb;
+}
+
+.logo i{
+  margin-right:10px;
+}
+
+.nav-links{
+  display:flex;
+  list-style:none;
+  gap:25px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#111;
+  font-weight:500;
+  transition:0.3s;
+}
+
+.nav-links a i{
+  margin-right:5px;
+}
+
+.nav-links a:hover{
+  color:#2563eb;
+}
+
+.nav-links a.active{
+  color:#2563eb;
+}
+
+#modeBtn{
+  padding:10px 18px;
+  border:none;
+  border-radius:8px;
+  background:#2563eb;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#modeBtn:hover{
+  transform:scale(1.05);
+}
+
+/* BACK BUTTON */
+
+.back-arrow{
+  position:fixed;
+  top:20px;
+  left:20px;
+  width:45px;
+  height:45px;
+  border:none;
+  border-radius:50%;
+  background:white;
+  color:#111;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  z-index:2000;
+  transition:0.3s;
+}
+
+.back-arrow:hover{
+  background:#2563eb;
+  color:white;
+  transform:scale(1.1);
+}
+
+/* SKILLS SECTION */
+
+.skills{
+  min-height:100vh;
+  padding:140px 8% 80px;
+}
+
+.section-header{
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.section-tag{
+  color:#2563eb;
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.skills h1{
+  font-size:45px;
+  color:#2563eb;
+  margin:10px 0;
+}
+
+.skills-subtitle{
+  text-align:center;
+  color:#666;
+  margin-bottom:40px;
+}
+
+.skills-container{
+  max-width:800px;
+  margin:auto;
+}
+
+.skill-box{
+  margin-bottom:35px;
+}
+
+.skill-title{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+  font-weight:600;
+}
+
+.skill-title i{
+  color:#2563eb;
+  margin-right:8px;
+}
+
+.skill-bar{
+  width:100%;
+  height:12px;
+  background:#d1d5db;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.skill-fill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#2563eb,#7c3aed);
+  border-radius:20px;
+  transition:2s ease;
+  position:relative;
+}
+
+.skill-fill::after{
+  content:'';
+  position:absolute;
+  right:0;
+  top:-2px;
+  width:10px;
+  height:16px;
+  background:#7c3aed;
+  border-radius:50%;
+}
+
+/* STATS SECTION IN SKILLS */
+
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:25px;
+  margin-top:60px;
+  padding:40px 0;
+  border-top:2px solid #e0e0e0;
+}
+
+.stat-item{
+  text-align:center;
+  padding:25px;
+  background:white;
+  border-radius:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  transition:0.3s;
+}
+
+.stat-item:hover{
+  transform:translateY(-5px);
+}
+
+.stat-item i{
+  font-size:45px;
+  color:#2563eb;
+  margin-bottom:15px;
+}
+
+.stat-number{
+  font-size:35px;
+  font-weight:bold;
+  color:#2563eb;
+}
+
+.stat-label{
+  font-size:14px;
+  color:#666;
+  margin-top:5px;
+}
+
+/* CERTIFICATE BUTTON */
+
+.certificate-btn-container{
+  text-align:center;
+  margin:20px 0 40px;
+}
+
+.certificate-btn{
+  padding:14px 35px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+
+.certificate-btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 5px 20px rgba(37,99,235,0.4);
+}
+
+/* CERTIFICATE SECTION */
+
+.certificate-section{
+  padding:40px 8% 80px;
+  background:linear-gradient(135deg,rgba(37,99,235,0.05),rgba(124,58,237,0.05));
+}
+
+.certificate-section h1{
+  text-align:center;
+  font-size:40px;
+  color:#2563eb;
+  margin-bottom:15px;
+}
+
+.certificate-subtitle{
+  text-align:center;
+  color:#666;
+  margin-bottom:50px;
+}
+
+.certificate-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
+}
+
+.certificate-card{
+  background:white;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 6px 15px rgba(0,0,0,0.1);
+  transition:0.3s;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+}
+
+.certificate-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}
+
+.certificate-card::before{
+  content:'🔍 Click to view';
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(0,0,0,0.8);
+  color:white;
+  padding:5px 15px;
+  border-radius:20px;
+  font-size:12px;
+  opacity:0;
+  transition:0.3s;
+  z-index:10;
+}
+
+.certificate-card:hover::before{
+  opacity:1;
+}
+
+.certificate-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  transition:0.3s;
+}
+
+.certificate-card:hover img{
+  transform:scale(1.05);
+}
+
+.certificate-icon{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:#2563eb;
+  color:white;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+}
+
+.certificate-card h2{
+  color:#2563eb;
+  margin:20px 0 10px;
+  font-size:20px;
+}
+
+.certificate-card p{
+  padding-bottom:20px;
+  color:#555;
+  font-size:14px;
+}
+
+.certificate-date{
+  display:inline-block;
+  margin-bottom:15px;
+  padding:3px 12px;
+  background:#e0e0e0;
+  border-radius:20px;
+  font-size:12px;
+}
+
+/* CERTIFICATE POPUP */
+
+.certificate-popup{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.95);
+  justify-content:center;
+  align-items:center;
+  z-index:5000;
+  animation:fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+.certificate-popup img{
+  width:80%;
+  max-width:900px;
+  border-radius:10px;
+  box-shadow:0 0 30px rgba(255,255,255,0.2);
+  animation:zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn{
+  from{
+    transform:scale(0.8);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.close-btn{
+  position:absolute;
+  top:20px;
+  right:40px;
+  font-size:50px;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.close-btn:hover{
+  transform:scale(1.2);
+  color:#2563eb;
+}
+
+/* FOOTER */
+
+footer{
+  background:#2563eb;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+
+.footer-content p{
+  margin-bottom:10px;
+}
+
+.footer-links{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+.footer-links a{
+  color:white;
+  text-decoration:none;
+  font-size:12px;
+}
+
+.footer-links a:hover{
+  text-decoration:underline;
+}
+
+/* SCROLL TOP BUTTON */
+
+#topBtn{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  width:50px;
+  height:50px;
+  border:none;
+  border-radius:50%;
+  background:#2563eb;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+  transition:0.3s;
+  z-index:1000;
+  display:none;
+}
+
+#topBtn:hover{
+  background:#1e40af;
+  transform:scale(1.1);
+}
+
+/* WHATSAPP FLOAT */
+
+.whatsapp-float{
+  position:fixed;
+  bottom:30px;
+  left:30px;
+  width:55px;
+  height:55px;
+  background:#25D366;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:30px;
+  text-decoration:none;
+  box-shadow:0 4px 15px rgba(0,0,0,0.3);
+  z-index:1000;
+  transition:0.3s;
+}
+
+.whatsapp-float:hover{
+  transform:scale(1.1);
+}
+
+.whatsapp-tooltip{
+  position:absolute;
+  left:65px;
+  background:#333;
+  color:white;
+  padding:5px 10px;
+  border-radius:5px;
+  font-size:12px;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+}
+
+.whatsapp-float:hover .whatsapp-tooltip{
+  opacity:1;
+}
+
+/* DARK MODE */
+
+.dark-mode{
+  background:#111827;
+  color:white;
+}
+
+.dark-mode nav{
+  background:#1f2937;
+}
+
+.dark-mode .nav-links a{
+  color:white;
+}
+
+.dark-mode .nav-links a.active{
+  color:#60a5fa;
+}
+
+.dark-mode .certificate-card{
+  background:#1f2937;
+  color:white;
+}
+
+.dark-mode .certificate-card p{
+  color:#d1d5db;
+}
+
+.dark-mode .stat-item{
+  background:#1f2937;
+}
+
+.dark-mode .stat-label{
+  color:#aaa;
+}
+
+.dark-mode .skills-subtitle,
+.dark-mode .certificate-subtitle{
+  color:#aaa;
+}
+
+.dark-mode .back-arrow{
+  background:#1f2937;
+  color:white;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  nav{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  .nav-links{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .skills h1,
+  .certificate-section h1{
+    font-size:35px;
+  }
+
+  .stats-row{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .certificate-popup img{
+    width:95%;
+  }
+
+  .close-btn{
+    top:10px;
+    right:20px;
+    font-size:35px;
+  }
+
+  .whatsapp-float{
+    bottom:20px;
+    left:20px;
+    width:45px;
+    height:45px;
+    font-size:25px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOADER -->
+
+<div id="loader">
+  <div class="spinner"></div>
+</div>
+
+<!-- SCROLL PROGRESS BAR -->
+
+<div class="scroll-progress"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+
+  <div class="logo">
+    <i class="fas fa-code"></i> Nithya Portfolio
+  </div>
+
+  <ul class="nav-links">
+
+    <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+
+    <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+
+    <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
+
+    <li><a href="skills.html" class="active"><i class="fas fa-cogs"></i> Skills</a></li>
+
+    <li><a href="project.html"><i class="fas fa-folder-open"></i> Projects</a></li>
+
+    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+
+  </ul>
+
+  <button id="modeBtn">
+    <i class="fas fa-moon"></i> Dark Mode
+  </button>
+
+</nav>
+
+<!-- BACK BUTTON -->
+
+<button class="back-arrow"
+        onclick="goBack()"
+        aria-label="Go back">
+
+  <i class="fas fa-arrow-left"></i>
+
+</button>
+
+<!-- SKILLS SECTION -->
+
+<section class="skills">
+
+  <div class="section-header">
+    <span class="section-tag"><i class="fas fa-chart-line"></i> What I Know</span>
+    <h1>My Technical Skills</h1>
+    <p class="skills-subtitle">Continuously learning and improving every day</p>
+  </div>
+
+  <div class="skills-container">
+
+    <div class="skill-box">
+      <div class="skill-title">
+        <span><i class="fab fa-html5"></i> HTML5</span>
+        <span>95%</span>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-fill html" data-width="95"></div>
+      </div>
+    </div>
+
+    <div class="skill-box">
+      <div class="skill-title">
+        <span><i class="fab fa-css3-alt"></i> CSS3</span>
+        <span>90%</span>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-fill css" data-width="90"></div>
+      </div>
+    </div>
+
+    <div class="skill-box">
+      <div class="skill-title">
+        <span><i class="fab fa-js"></i> JavaScript</span>
+        <span>80%</span>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-fill js" data-width="80"></div>
+      </div>
+    </div>
+
+    <div class="skill-box">
+      <div class="skill-title">
+        <span><i class="fab fa-react"></i> React JS</span>
+        <span>75%</span>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-fill react" data-width="75"></div>
+      </div>
+    </div>
+
+    <div class="skill-box">
+      <div class="skill-title">
+        <span><i class="fas fa-database"></i> SQL</span>
+        <span>85%</span>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-fill sql" data-width="85"></div>
+      </div>
+    </div>
+
+    <div class="skill-box">
+      <div class="skill-title">
+        <span><i class="fab fa-python"></i> Python</span>
+        <span>70%</span>
+      </div>
+      <div class="skill-bar">
+        <div class="skill-fill python" data-width="70"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <i class="fas fa-clock"></i>
+      <div class="stat-number" id="hoursCoded">500+</div>
+      <div class="stat-label">Hours Coded</div>
+    </div>
+    <div class="stat-item">
+      <i class="fas fa-project-diagram"></i>
+      <div class="stat-number" id="projectsDone">8+</div>
+      <div class="stat-label">Projects Done</div>
+    </div>
+    <div class="stat-item">
+      <i class="fas fa-certificate"></i>
+      <div class="stat-number" id="certificatesCount">12+</div>
+      <div class="stat-label">Certificates</div>
+    </div>
+    <div class="stat-item">
+      <i class="fas fa-coffee"></i>
+      <div class="stat-number" id="coffeeCups">100+</div>
+      <div class="stat-label">Coffee Cups</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CERTIFICATE BUTTON -->
+
+<div class="certificate-btn-container">
+
+  <button onclick="showCertificates()" class="certificate-btn">
+    <i class="fas fa-certificate"></i> View My Certificates
+    <i class="fas fa-arrow-down"></i>
+  </button>
+
+</div>
+
+<!-- CERTIFICATE SECTION -->
+
+<section id="certificate-section" class="certificate-section">
+
+  <h1><i class="fas fa-award"></i> My Certificates</h1>
+  <p class="certificate-subtitle">Achievements and recognitions I've earned</p>
+
+  <div class="certificate-container">
+
+    <!-- CERTIFICATE 1 -->
+    <div class="certificate-card" onclick="openCertificate('certificate1')">
+      <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
+      <img src="/New folder/Screenshot 2026-05-17 202130.png" alt="Certificate">
+      <h2>Web Development</h2>
+      <p>Great Learning Academy</p>
+      <span class="certificate-date">2025</span>
+    </div>
+
+    <!-- CERTIFICATE 2 -->
+    <div class="certificate-card" onclick="openCertificate('certificate2')">
+      <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
+      <img src="/New folder/Screenshot 2026-05-17 203013.png" alt="Certificate">
+      <h2>NPTEL Certificate</h2>
+      <p>NPTEL Online Certification</p>
+      <span class="certificate-date">2025</span>
+    </div>
+
+    <!-- CERTIFICATE 3 -->
+    <div class="certificate-card" onclick="openCertificate('certificate3')">
+      <div class="certificate-icon"><i class="fas fa-certificate"></i></div>
+      <img src="/New folder/Screenshot 2026-05-14 122007.png" alt="Certificate">
+      <h2>AI Fluency</h2>
+      <p>AI Certification Program</p>
+      <span class="certificate-date">2025</span>
+    </div>
+
+    <!-- CERTIFICATE 4 -->
+    <div class="certificate-card" onclick="openCertificate('certificate4')">
+      <div class="certificate-icon"><i class="fas fa-briefcase"></i></div>
+      <img src="/New folder/Screenshot 2026-05-18 062916.png" alt="Certificate">
+      <h2>Internship Letter</h2>
+      <p>Company Internship</p>
+      <span class="certificate-date">2025</span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-content">
+    <p><i class="far fa-copyright"></i> 2026 Nithya Portfolio | All Rights Reserved</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<!-- POPUP CERTIFICATES -->
+
+<div id="certificate1" class="certificate-popup">
+  <span class="close-btn" onclick="closeCertificate('certificate1')">&times;</span>
+  <img src="/New folder/Screenshot 2026-05-17 202130.png" alt="Full Certificate">
+</div>
+
+<div id="certificate2" class="certificate-popup">
+  <span class="close-btn" onclick="closeCertificate('certificate2')">&times;</span>
+  <img src="/New folder/Screenshot 2026-05-17 203013.png" alt="Full Certificate">
+</div>
+
+<div id="certificate3" class="certificate-popup">
+  <span class="close-btn" onclick="closeCertificate('certificate3')">&times;</span>
+  <img src="/New folder/Screenshot 2026-05-14 122007.png" alt="Full Certificate">
+</div>
+
+<div id="certificate4" class="certificate-popup">
+  <span class="close-btn" onclick="closeCertificate('certificate4')">&times;</span>
+  <img src="/New folder/Screenshot 2026-05-18 062916.png" alt="Full Certificate">
+</div>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+
+<a href="https://wa.me/919876543210?text=Hi%20Nithya,%20I%20saw%20your%20skills%20page!"
+   class="whatsapp-float"
+   target="_blank">
+
+  <i class="fab fa-whatsapp"></i>
+  <span class="whatsapp-tooltip">Chat with me!</span>
+
+</a>
+
+<!-- SCROLL TO TOP BUTTON -->
+
+<button id="topBtn" onclick="topFunction()" aria-label="Scroll to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+
+/* LOADER */
+window.addEventListener("load", function(){
+  const loader = document.getElementById("loader");
+  setTimeout(() => {
+    loader.style.display = "none";
+  }, 500);
+  
+  // Animate skill bars
+  setTimeout(() => {
+    animateSkillBars();
+  }, 300);
+});
+
+/* ANIMATE SKILL BARS */
+function animateSkillBars(){
+  const skillFills = document.querySelectorAll('.skill-fill');
+  skillFills.forEach(fill => {
+    const width = fill.getAttribute('data-width');
+    fill.style.width = width + '%';
+  });
+}
+
+/* DARK MODE */
+const modeBtn = document.getElementById("modeBtn");
+
+// Load saved preference
+if(localStorage.getItem("skillsDarkMode") === "enabled"){
+  document.body.classList.add("dark-mode");
+  modeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+} else {
+  modeBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+}
+
+modeBtn.addEventListener("click", function(){
+  document.body.classList.toggle("dark-mode");
+  if(document.body.classList.contains("dark-mode")){
+    modeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    localStorage.setItem("skillsDarkMode", "enabled");
+  }
+  else{
+    modeBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+    localStorage.setItem("skillsDarkMode", "disabled");
+  }
+});
+
+/* BACK BUTTON */
+function goBack(){
+  if(window.history.length > 1){
+    window.history.back();
+  } else {
+    alert("No previous page");
+  }
+}
+
+/* SCROLL PROGRESS */
+window.addEventListener('scroll', () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  const progressBar = document.querySelector('.scroll-progress');
+  if(progressBar) progressBar.style.width = scrolled + '%';
+  
+  // Show/hide top button
+  const topBtn = document.getElementById('topBtn');
+  if(winScroll > 300){
+    topBtn.style.display = 'block';
+  } else {
+    topBtn.style.display = 'none';
+  }
+});
+
+/* SCROLL TO TOP */
+function topFunction(){
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* CERTIFICATE BUTTON */
+function showCertificates(){
+  document.getElementById("certificate-section").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+/* OPEN CERTIFICATE */
+function openCertificate(id){
+  document.getElementById(id).style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+/* CLOSE CERTIFICATE */
+function closeCertificate(id){
+  document.getElementById(id).style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
+/* CLOSE ON ESC KEY */
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    const popups = document.querySelectorAll('.certificate-popup');
+    popups.forEach(popup => {
+      popup.style.display = "none";
+    });
+    document.body.style.overflow = "auto";
+  }
+});
+
+/* CLICK OUTSIDE TO CLOSE */
+document.querySelectorAll('.certificate-popup').forEach(popup => {
+  popup.addEventListener('click', function(e){
+    if(e.target === this){
+      this.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  });
+});
+
+/* STATS COUNTER ANIMATION */
+const observerOptions = {
+  threshold: 0.3
+};
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const stats = [
+        { element: document.getElementById('hoursCoded'), target: 500, suffix: '+' },
+        { element: document.getElementById('projectsDone'), target: 8, suffix: '+' },
+        { element: document.getElementById('certificatesCount'), target: 12, suffix: '+' },
+        { element: document.getElementById('coffeeCups'), target: 100, suffix: '+' }
+      ];
+      
+      stats.forEach(stat => {
+        if(stat.element && !stat.element.dataset.animated){
+          stat.element.dataset.animated = 'true';
+          let current = 0;
+          const increment = stat.target / 50;
+          const updateCounter = () => {
+            current += increment;
+            if(current < stat.target){
+              stat.element.textContent = Math.ceil(current) + stat.suffix;
+              requestAnimationFrame(updateCounter);
+            } else {
+              stat.element.textContent = stat.target + stat.suffix;
+            }
+          };
+          updateCounter();
+        }
+      });
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+const statsRow = document.querySelector('.stats-row');
+if(statsRow){
+  statsObserver.observe(statsRow);
+}
+
+</script>
+
+</body>
+</html>

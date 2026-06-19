@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Projects | Nithya Portfolio</title>
+
+  <!-- GOOGLE FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #111;
+      transition: 0.4s;
+      overflow-x: hidden;
+    }
+
+    /* SCROLL PROGRESS BAR */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: linear-gradient(90deg, #2563eb, #7c3aed);
+      z-index: 10000;
+      transition: width 0.1s;
+    }
+
+    /* LOADER */
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: 0.5s;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #ddd;
+      border-top: 6px solid #2563eb;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* NAVBAR */
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    .logo i {
+      margin-right: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a i {
+      margin-right: 5px;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    .nav-links a.active {
+      color: #2563eb;
+    }
+
+    #modeBtn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #modeBtn:hover {
+      transform: scale(1.05);
+    }
+
+    /* BACK BUTTON */
+    .back-arrow {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 45px;
+      height: 45px;
+      border: none;
+      border-radius: 50%;
+      background: white;
+      color: #111;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 2000;
+      transition: 0.3s;
+    }
+
+    .back-arrow:hover {
+      background: #2563eb;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    /* PROJECT SECTION */
+    .projects {
+      min-height: 100vh;
+      padding: 140px 8% 80px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-tag {
+      color: #2563eb;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .projects h1 {
+      font-size: 45px;
+      color: #2563eb;
+      margin: 10px 0;
+    }
+
+    .projects-subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .project-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: 0.4s;
+      position: relative;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .project-img {
+      position: relative;
+      overflow: hidden;
+      height: 220px;
+    }
+
+    .project-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+
+    .project-card:hover .project-img img {
+      transform: scale(1.1);
+    }
+
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(37, 99, 235, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-overlay span {
+      color: white;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 20px;
+    }
+
+    .project-content {
+      padding: 25px;
+    }
+
+    .project-card h2 {
+      margin-bottom: 12px;
+      color: #2563eb;
+      font-size: 22px;
+    }
+
+    .project-card p {
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .tech {
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech span {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .project-card button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-card button:hover {
+      background: #1e40af;
+      transform: scale(1.05);
+    }
+
+    /* STATS SECTION */
+    .stats-section {
+      padding: 60px 8%;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
+    }
+
+    .stats-section h2 {
+      text-align: center;
+      color: #2563eb;
+      margin-bottom: 40px;
+      font-size: 35px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-card i {
+      font-size: 45px;
+      color: #2563eb;
+      margin-bottom: 15px;
+    }
+
+    .stat-number {
+      font-size: 35px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    .stat-label {
+      color: #666;
+      margin-top: 5px;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 60px 8%;
+      text-align: center;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+    }
+
+    .cta-section h2 {
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .cta-section p {
+      margin-bottom: 25px;
+    }
+
+    .cta-btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 50px;
+      background: white;
+      color: #2563eb;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .footer-content p {
+      margin-bottom: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* SCROLL TOP BUTTON */
+    #topBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 50%;
+      background: #2563eb;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 1000;
+      display: none;
+    }
+
+    #topBtn:hover {
+      background: #1e40af;
+      transform: scale(1.1);
+    }
+
+    /* WHATSAPP FLOAT */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 55px;
+      height: 55px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 30px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      transition: 0.3s;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-tooltip {
+      position: absolute;
+      left: 65px;
+      background: #333;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s;
+    }
+
+    .whatsapp-float:hover .whatsapp-tooltip {
+      opacity: 1;
+    }
+
+    /* PROJECT POPUP */
+    .project-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      justify-content: center;
+      align-items: center;
+      z-index: 5000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .popup-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .popup-content i {
+      font-size: 60px;
+      color: #2563eb;
+      margin-bottom: 20px;
+    }
+
+    .popup-content h2 {
+      color: #2563eb;
+      margin-bottom: 15px;
+    }
+
+    .popup-content p {
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .popup-close {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .popup-close:hover {
+      background: #1e40af;
+    }
+
+    /* DARK MODE */
+    .dark-mode {
+      background: #111827;
+      color: white;
+    }
+
+    .dark-mode nav {
+      background: #1f2937;
+    }
+
+    .dark-mode .nav-links a {
+      color: white;
+    }
+
+    .dark-mode .nav-links a.active {
+      color: #60a5fa;
+    }
+
+    .dark-mode .project-card {
+      background: #1f2937;
+    }
+
+    .dark-mode .project-card p {
+      color: #d1d5db;
+    }
+
+    .dark-mode .stat-card {
+      background: #1f2937;
+    }
+
+    .dark-mode .stat-label {
+      color: #aaa;
+    }
+
+    .dark-mode .projects-subtitle {
+      color: #aaa;
+    }
+
+    .dark-mode .back-arrow {
+      background: #1f2937;
+      color: white;
+    }
+
+    .dark-mode .popup-content {
+      background: #1f2937;
+    }
+
+    .dark-mode .popup-content p {
+      color: #d1d5db;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .projects h1 {
+        font-size: 35px;
+      }
+
+      .project-container {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .whatsapp-float {
+        bottom: 20px;
+        left: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 25px;
+      }
+
+      .back-arrow {
+        top: 90px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- SCROLL PROGRESS BAR -->
+  <div class="scroll-progress"></div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">
+      <i class="fas fa-folder-open"></i> Nithya Portfolio
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+      <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
+      <li><a href="skills.html"><i class="fas fa-cogs"></i> Skills</a></li>
+      <li><a href="project.html" class="active"><i class="fas fa-code"></i> Projects</a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+
+    <button id="modeBtn">
+      <i class="fas fa-moon"></i> Dark Mode
+    </button>
+  </nav>
+
+  <!-- BACK BUTTON -->
+  <button class="back-arrow" onclick="goBack()" aria-label="Go back">
+    <i class="fas fa-arrow-left"></i>
+  </button>
+
+  <!-- PROJECT SECTION -->
+  <section class="projects">
+    <div class="section-header">
+      <span class="section-tag"><i class="fas fa-laptop-code"></i> My Work</span>
+      <h1>Creative Projects</h1>
+      <p class="projects-subtitle">Building amazing experiences through code</p>
+    </div>
+
+    <div class="project-container">
+
+      <!-- PROJECT 1 - Portfolio Website -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Portfolio Project">
+          <div class="project-overlay">
+            <span><i class="fas fa-eye"></i> Click to view</span>
+          </div>
+        </div>
+        <div class="project-content">
+          <h2><i class="fas fa-user"></i> Portfolio Website</h2>
+          <p>Responsive personal portfolio website using HTML, CSS and JavaScript with dark mode and smooth animations.</p>
+          <div class="tech">
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+            <span>Responsive</span>
+          </div>
+          <button onclick="openProject('Portfolio Website', 'A complete personal portfolio website with dark mode, typing effect, and responsive design. Built with modern HTML5, CSS3, and JavaScript.')">
+            View Project <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 - Weather App -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Weather App">
+          <div class="project-overlay">
+            <span><i class="fas fa-eye"></i> Click to view</span>
+          </div>
+        </div>
+        <div class="project-content">
+          <h2><i class="fas fa-cloud-sun"></i> Weather App</h2>
+          <p>Weather application that displays live weather updates using OpenWeatherMap API integration with beautiful UI.</p>
+          <div class="tech">
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+            <span>API</span>
+          </div>
+          <button onclick="openProject('Weather App', 'Real-time weather application using OpenWeatherMap API. Shows temperature, humidity, wind speed, and weather conditions for any city.')">
+            View Project <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 - Calculator App -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://cdn-icons-png.flaticon.com/512/2721/2721297.png" alt="Calculator App">
+          <div class="project-overlay">
+            <span><i class="fas fa-eye"></i> Click to view</span>
+          </div>
+        </div>
+        <div class="project-content">
+          <h2><i class="fas fa-calculator"></i> Calculator App</h2>
+          <p>Simple yet powerful calculator using JavaScript with responsive user interface and smooth button animations.</p>
+          <div class="tech">
+            <span>JavaScript</span>
+            <span>CSS3</span>
+            <span>Responsive</span>
+            <span>DOM</span>
+          </div>
+          <button onclick="openProject('Calculator App', 'A fully functional calculator with basic arithmetic operations, clean design, and keyboard support. Built with vanilla JavaScript.')">
+            View Project <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section class="stats-section">
+    <h2><i class="fas fa-chart-line"></i> Project Statistics</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <i class="fas fa-code"></i>
+        <div class="stat-number" id="projectsCount">3+</div>
+        <div class="stat-label">Completed Projects</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-users"></i>
+        <div class="stat-number" id="clientsCount">5+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-coffee"></i>
+        <div class="stat-number" id="hoursCount">200+</div>
+        <div class="stat-label">Hours Spent</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-star"></i>
+        <div class="stat-number" id="feedbackCount">100%</div>
+        <div class="stat-label">Positive Feedback</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <h2><i class="fas fa-rocket"></i> Have a Project in Mind?</h2>
+    <p>Let's collaborate and build something amazing together!</p>
+    <button class="cta-btn" onclick="window.location.href='contact.html'">
+      Contact Me <i class="fas fa-paper-plane"></i>
+    </button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <p><i class="far fa-copyright"></i> 2026 Nithya Portfolio | All Rights Reserved</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PROJECT POPUP -->
+  <div id="projectPopup" class="project-popup">
+    <div class="popup-content">
+      <i class="fas fa-folder-open"></i>
+      <h2 id="popupTitle">Project Title</h2>
+      <p id="popupDesc">Project description goes here...</p>
+      <button class="popup-close" onclick="closeProjectPopup()">
+        Close <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/919876543210?text=Hi%20Nithya,%20I%20saw%20your%20projects%20page!"
+     class="whatsapp-float"
+     target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-tooltip">Chat with me!</span>
+  </a>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <button id="topBtn" onclick="topFunction()" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    /* LOADER */
+    window.addEventListener("load", function() {
+      const loader = document.getElementById("loader");
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, 500);
+    });
+
+    /* DARK MODE */
+    const modeBtn = document.getElementById("modeBtn");
+
+    // Load saved preference
+    if (localStorage.getItem("projectsDarkMode") === "enabled") {
+      document.body.classList.add("dark-mode");
+      modeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    } else {
+      modeBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+    }
+
+    modeBtn.addEventListener("click", function() {
+      document.body.classList.toggle("dark-mode");
+      if (document.body.classList.contains("dark-mode")) {
+        modeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        localStorage.setItem("projectsDarkMode", "enabled");
+      } else {
+        modeBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+        localStorage.setItem("projectsDarkMode", "disabled");
+      }
+    });
+
+    /* BACK BUTTON */
+    function goBack() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        alert("No previous page");
+      }
+    }
+
+    /* SCROLL PROGRESS */
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      const progressBar = document.querySelector('.scroll-progress');
+      if (progressBar) progressBar.style.width = scrolled + '%';
+
+      // Show/hide top button
+      const topBtn = document.getElementById('topBtn');
+      if (winScroll > 300) {
+        topBtn.style.display = 'block';
+      } else {
+        topBtn.style.display = 'none';
+      }
+    });
+
+    /* SCROLL TO TOP */
+    function topFunction() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* PROJECT POPUP */
+    function openProject(title, description) {
+      document.getElementById('popupTitle').textContent = title;
+      document.getElementById('popupDesc').textContent = description;
+      document.getElementById('projectPopup').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectPopup() {
+      document.getElementById('projectPopup').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close popup on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeProjectPopup();
+      }
+    });
+
+    // Close popup on click outside
+    document.getElementById('projectPopup').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeProjectPopup();
+      }
+    });
+
+    /* STATS COUNTER ANIMATION */
+    const observerOptions = {
+      threshold: 0.3
+    };
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const stats = [
+            { element: document.getElementById('projectsCount'), target: 3, suffix: '+' },
+            { element: document.getElementById('clientsCount'), target: 5, suffix: '+' },
+            { element: document.getElementById('hoursCount'), target: 200, suffix: '+' },
+            { element: document.getElementById('feedbackCount'), target: 100, suffix: '%' }
+          ];
+
+          stats.forEach(stat => {
+            if (stat.element && !stat.element.dataset.animated) {
+              stat.element.dataset.animated = 'true';
+              let current = 0;
+              const increment = stat.target / 50;
+              const updateCounter = () => {
+                current += increment;
+                if (current < stat.target) {
+                  stat.element.textContent = Math.ceil(current) + stat.suffix;
+                  requestAnimationFrame(updateCounter);
+                } else {
+                  stat.element.textContent = stat.target + stat.suffix;
+                }
+              };
+              updateCounter();
+            }
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+      statsObserver.observe(statsSection);
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Nithya Portfolio</title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ─── RESET & BASE ─── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            padding-top: 100px;
+            position: relative;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        /* ─── DARK MODE BODY ─── */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+        }
+
+        /* ─── NAVBAR ─── */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+            transition: background 0.4s, box-shadow 0.4s;
+        }
+
+        body.dark-mode .navbar {
+            background: #1f2937;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb;
+            transition: color 0.4s;
+        }
+
+        body.dark-mode .logo {
+            color: #60a5fa;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #111827;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #e2e8f0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2563eb;
+        }
+
+        body.dark-mode .nav-links a:hover,
+        body.dark-mode .nav-links a.active {
+            color: #60a5fa;
+        }
+
+        .nav-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: #1e40af;
+            transform: scale(1.05);
+        }
+
+        body.dark-mode .nav-btn {
+            background: #60a5fa;
+            color: #0f172a;
+        }
+
+        body.dark-mode .nav-btn:hover {
+            background: #93bbfc;
+        }
+
+        /* ─── ANIMATED BACKGROUND CIRCLES ─── */
+        .bg-circle {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            animation: float 20s infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* ─── BACK BUTTON ─── */
+        .back-arrow {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            color: #111;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: 0.3s;
+        }
+
+        .back-arrow:hover {
+            background: #2563eb;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        body.dark-mode .back-arrow {
+            background: #334155;
+            color: white;
+        }
+
+        body.dark-mode .back-arrow:hover {
+            background: #60a5fa;
+            color: #0f172a;
+        }
+
+        /* ─── MAIN CONTAINER ─── */
+        .contact-container {
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transition: 0.4s;
+            animation: fadeInUp 0.6s ease;
+            position: relative;
+            z-index: 10;
+            margin: 0 auto;
+        }
+
+        body.dark-mode .contact-container {
+            background: #1e293b;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ─── LEFT SECTION ─── */
+        .left-section {
+            width: 40%;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.4s;
+        }
+
+        body.dark-mode .left-section {
+            background: linear-gradient(135deg, #0f172a, #1a2332);
+        }
+
+        .left-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .profile-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .left-section img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 4px solid #fff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            object-fit: cover;
+        }
+
+        .left-section img:hover {
+            transform: scale(1.05);
+            border-color: #60a5fa;
+        }
+
+        .left-section h1 {
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .left-section .title-badge {
+            display: inline-block;
+            background: rgba(96, 165, 250, 0.2);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .left-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .divider {
+            width: 50px;
+            height: 3px;
+            background: #60a5fa;
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+
+        /* ─── SOCIAL LINKS ─── */
+        .social-links {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #60a5fa;
+            transform: translateY(-3px);
+        }
+
+        /* ─── RIGHT SECTION ─── */
+        .right-section {
+            width: 60%;
+            padding: 50px 40px;
+            background: white;
+            transition: background 0.4s;
+        }
+
+        body.dark-mode .right-section {
+            background: #1e293b;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        .section-header .tag {
+            color: #60a5fa;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .right-section h2 {
+            color: #0f172a;
+            font-size: 32px;
+            font-weight: 700;
+            transition: color 0.4s;
+        }
+
+        body.dark-mode .right-section h2 {
+            color: #f1f5f9;
+        }
+
+        .right-section h2 i {
+            color: #60a5fa;
+            margin-right: 10px;
+        }
+
+        /* ─── CONTACT GRID ─── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .contact-box {
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 16px;
+            transition: 0.3s;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+        }
+
+        body.dark-mode .contact-box {
+            background: #334155;
+            border-color: #475569;
+        }
+
+        .contact-box:hover {
+            background: #eff6ff;
+            transform: translateY(-5px);
+            border-color: #60a5fa;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .contact-box:hover {
+            background: #3b4a5f;
+            border-color: #60a5fa;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .contact-box h3 {
+            color: #0f172a;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.4s;
+        }
+
+        body.dark-mode .contact-box h3 {
+            color: #f1f5f9;
+        }
+
+        .contact-box p {
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.5;
+            word-break: break-word;
+            transition: color 0.4s;
+        }
+
+        body.dark-mode .contact-box p {
+            color: #cbd5e1;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: #60a5fa;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s;
+        }
+
+        .copy-btn:hover {
+            color: #2563eb;
+        }
+
+        body.dark-mode .copy-btn:hover {
+            color: #93bbfc;
+        }
+
+        /* ─── CONTACT FORM ─── */
+        .contact-form {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            transition: border-color 0.4s;
+        }
+
+        body.dark-mode .contact-form {
+            border-color: #475569;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 20px;
+            color: #0f172a;
+            font-size: 20px;
+            transition: color 0.4s;
+        }
+
+        body.dark-mode .contact-form h3 {
+            color: #f1f5f9;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: 0.3s;
+            font-family: inherit;
+            background: #fff;
+            color: #111;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background: #334155;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+
+        body.dark-mode .form-group input::placeholder,
+        body.dark-mode .form-group textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px -5px rgba(102, 126, 234, 0.4);
+        }
+
+        /* ─── MAP SECTION ─── */
+        .map-section {
+            margin-top: 30px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .map-section iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+
+        /* ─── TOAST MESSAGE ─── */
+        .toast-message {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #10b981;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .toast-message.show {
+            transform: translateX(0);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 992px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            .left-section,
+            .right-section {
+                width: 100%;
+            }
+            .left-section {
+                padding: 40px 25px;
+            }
+            .right-section {
+                padding: 30px 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .nav-links {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links a {
+                font-size: 13px;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .back-arrow {
+                top: 90px;
+                left: 10px;
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+            body {
+                padding-top: 130px;
+                padding: 130px 10px 20px;
+            }
+            .right-section h2 {
+                font-size: 24px;
+            }
+            .left-section h1 {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .logo {
+                font-size: 18px;
+            }
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .nav-links {
+                gap: 8px;
+            }
+            .nav-links a {
+                font-size: 11px;
+            }
+            .left-section img {
+                width: 100px;
+                height: 100px;
+            }
+            .right-section {
+                padding: 20px 15px;
+            }
+            .contact-box {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-laptop-code"></i> Nithya Portfolio
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="login.html">Login</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+
+        <!-- DARK MODE BUTTON IN NAVBAR — NOW WITH ID -->
+        <button class="nav-btn" id="modeBtn">
+            <i class="fas fa-moon"></i> Dark Mode
+        </button>
+    </nav>
+
+    <!-- BACKGROUND ANIMATED CIRCLES -->
+    <div class="bg-circle" style="width:300px;height:300px;top:-100px;left:-100px;"></div>
+    <div class="bg-circle" style="width:200px;height:200px;bottom:50px;right:50px;animation-duration:15s;"></div>
+    <div class="bg-circle" style="width:150px;height:150px;bottom:200px;left:20%;animation-duration:25s;"></div>
+
+    <!-- BACK BUTTON -->
+    <button class="back-arrow" onclick="goBack()" aria-label="Go back">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <!-- MAIN CONTAINER -->
+    <div class="contact-container">
+
+        <!-- LEFT SIDE - PROFILE -->
+        <div class="left-section">
+            <div class="profile-wrapper">
+                <img src="/New folder/proffessional.png" alt="profile">
+                <span class="title-badge"><i class="fas fa-graduation-cap"></i> CSE Student</span>
+            </div>
+
+            <h1>Nithya R</h1>
+
+            <div class="divider"></div>
+
+            <p>
+                <i class="fas fa-laptop-code"></i> Web Developer & Designer<br>
+                Passionate about creating beautiful websites<br>
+                HTML | CSS | JavaScript | React
+            </p>
+
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/nithya-r-25155b386/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/nr653552-nithya" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:nithya.r.cse29@princedrkvasudevan.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE - CONTACT DETAILS -->
+        <div class="right-section">
+            <div class="section-header">
+                <span class="tag"><i class="fas fa-comments"></i> GET IN TOUCH</span>
+                <h2><i class="fas fa-address-card"></i> Contact Details</h2>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-box" onclick="copyToClipboard('nithya.r.cse29@princedrkvasudevan.com', 'Email')">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p id="emailText">nithya.r.cse29@princedrkvasudevan.com</p>
+                    <button class="copy-btn"><i class="fas fa-copy"></i> Copy</button>
+                </div>
+
+                <div class="contact-box" onclick="copyToClipboard('+91 98765 43210', 'Phone')">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Phone Number</h3>
+                    <p>+91 98765 43210</p>
+                    <button class="copy-btn"><i class="fas fa-copy"></i> Copy</button>
+                </div>
+
+                <div class="contact-box">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Address</h3>
+                    <p>Tamil Nadu, India</p>
+                    <a href="https://maps.google.com/?q=Tamil+Nadu+India" target="_blank" style="font-size:12px;color:#60a5fa;text-decoration:none;">View on Map →</a>
+                </div>
+
+                <div class="contact-box">
+                    <div class="contact-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>College</h3>
+                    <p>Prince Dr. K. Vasudevan College of Engineering and Technology</p>
+                </div>
+
+                <div class="contact-box">
+                    <div class="contact-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Skills</h3>
+                    <p>HTML5, CSS3, JavaScript, Java, SQL, React JS</p>
+                </div>
+
+                <div class="contact-box">
+                    <div class="contact-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Availability</h3>
+                    <p>Available for Freelance & Internships</p>
+                    <span style="display:inline-block;margin-top:8px;padding:3px 10px;background:#10b981;color:white;border-radius:20px;font-size:10px;"><i class="fas fa-circle" style="font-size:8px;"></i> Open for work</span>
+                </div>
+            </div>
+
+            <!-- CONTACT FORM -->
+            <div class="contact-form">
+                <h3><i class="fas fa-paper-plane"></i> Send me a message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Your Message..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+
+            <!-- MAP SECTION -->
+            <div class="map-section">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d156678.5721126148!2d77.5!3d11!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8e9e5c6f3f5e5%3A0x9b2c0b2c1c2b2c2!2sTamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST MESSAGE -->
+<div id="toastMessage" class="toast-message">
+    <i class="fas fa-check-circle"></i> Copied to clipboard!
+</div>
+
+<script>
+    /* ============================================================
+       DARK MODE TOGGLE — NOW WORKS WITH NAVBAR BUTTON
+       ============================================================ */
+
+    const modeBtn = document.getElementById("modeBtn");
+
+    // Load saved preference
+    if (localStorage.getItem("contactDarkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+        modeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    } else {
+        modeBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+    }
+
+    // Toggle on click
+    modeBtn.addEventListener("click", function() {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+            modeBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+            localStorage.setItem("contactDarkMode", "enabled");
+        } else {
+            modeBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+            localStorage.setItem("contactDarkMode", "disabled");
+        }
+    });
+
+    /* ============================================================
+       BACK BUTTON
+       ============================================================ */
+    function goBack() {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            alert("No previous page");
+        }
+    }
+
+    /* ============================================================
+       COPY TO CLIPBOARD
+       ============================================================ */
+    function copyToClipboard(text, label) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(label + ' copied to clipboard! ✓');
+        }).catch(() => {
+            showToast('Failed to copy');
+        });
+    }
+
+    /* ============================================================
+       SHOW TOAST
+       ============================================================ */
+    function showToast(message) {
+        const toast = document.getElementById('toastMessage');
+        toast.innerHTML = '<i class="fas fa-check-circle"></i> ' + message;
+        toast.classList.add('show');
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
+
+    /* ============================================================
+       COPY BUTTON EVENT LISTENERS (prevents double-trigger)
+       ============================================================ */
+    document.querySelectorAll('.copy-btn').forEach((btn) => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const box = this.closest('.contact-box');
+            const textElement = box.querySelector('p');
+            if (textElement) {
+                let text = textElement.innerText.trim();
+                // Fix for email field
+                if (text.includes('nithya.r.cse29')) {
+                    text = 'nithya.r.cse29@princedrkvasudevan.com';
+                }
+                const label = box.querySelector('h3')?.innerText || 'Content';
+                copyToClipboard(text, label);
+            }
+        });
+    });
+
+    /* ============================================================
+       CONTACT FORM SUBMIT
+       ============================================================ */
+    const contactForm = document.getElementById('contactForm');
+
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        if (name === '' || email === '' || message === '') {
+            showToast('❌ Please fill all fields');
+            return;
+        }
+
+        if (!email.includes('@') || !email.includes('.')) {
+            showToast('❌ Please enter a valid email');
+            return;
+        }
+
+        // Save to localStorage
+        const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+        messages.push({
+            name: name,
+            email: email,
+            message: message,
+            date: new Date().toLocaleString()
+        });
+        localStorage.setItem('contactMessages', JSON.stringify(messages));
+
+        showToast('✅ Message sent successfully! I will contact you soon.');
+
+        // Reset form
+        contactForm.reset();
+    });
+
+    /* ============================================================
+       SCROLL ANIMATION FOR CONTACT BOXES
+       ============================================================ */
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.contact-box').forEach(box => {
+        box.style.opacity = '0';
+        box.style.transform = 'translateY(20px)';
+        box.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(box);
+    });
+
+    /* ============================================================
+       CONSOLE WELCOME
+       ============================================================ */
+    window.addEventListener('load', function() {
+        console.log('📬 Contact page loaded successfully!');
+    });
+</script>
+
+</body>
+</html>
